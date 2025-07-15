@@ -41,6 +41,22 @@ final class ExampleViewModel: ObservableObject {
 }
 ```
 
+📱 Using PaginationKit with UITableView
+
+```swift
+func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    guard let viewModel = viewModel else { return }
+
+    // When the user scrolls to the last item and more data is available, load the next page
+    if indexPath.row == viewModel.items.count - 1,
+       viewModel.hasMoreData,
+       viewModel.state != .error {
+        print("Loading more data because reached end of list at row:", indexPath.row)
+        viewModel.loadMoreIfNeeded()
+    }
+}
+```
+
 🧩 API Reference:
 
 Paginator<Item>
