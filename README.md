@@ -13,9 +13,11 @@ https://github.com/pooyan88/PaginationKit.git
 
 Or add the following in your `Package.swift`:
 
-```swift
 .package(url: "https://github.com/pooyan88/PaginationKit.git", from: "1.0.0")
-🚀 Usage Example
+
+```swift
+
+🚀 Usage Example:
 
 import PaginationKit
 
