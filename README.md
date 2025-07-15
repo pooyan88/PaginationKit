@@ -37,20 +37,24 @@ final class ExampleViewModel: ObservableObject {
         paginator?.reset()
     }
 }
-🧩 API Reference
+```
+
+🧩 API Reference:
 
 Paginator<Item>
 Property	Description
 items	The loaded items [Item]
 state	Current loading state (idle, loading, completed, error)
 hasMoreData	Indicates if more data is available to load
-Methods
+
+Methods:
+
 loadNextPage(): Loads the next page if available.
 reset(start:): Resets the paginator and starts from the given index.
-📋 Requirements
 
+📋 Requirements:
 iOS 13.0+
 Swift 5.7+
-📄 License
 
+📄 License:
 MIT License
