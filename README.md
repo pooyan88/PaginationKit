@@ -69,6 +69,3 @@ reset(start:): Resets the paginator and starts from the given index.
 📋 Requirements:
 iOS 13.0+
 Swift 5.7+
-
-📄 License:
-MIT License
