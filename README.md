@@ -48,12 +48,8 @@ func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forR
     guard let viewModel = viewModel else { return }
 
     // When the user scrolls to the last item and more data is available, load the next page
-    if indexPath.row == viewModel.items.count - 1,
-       viewModel.hasMoreData,
-       viewModel.state != .error {
-        print("Loading more data because reached end of list at row:", indexPath.row)
-        viewModel.loadMoreIfNeeded()
-    }
+    viewModel.paginator.paginateIfNeeded(currentIndex: indexPath.row, threshold: 1)
+
 }
 ```
 
