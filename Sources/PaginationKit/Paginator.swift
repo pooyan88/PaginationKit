@@ -11,7 +11,7 @@ import Foundation
 public final class Paginator<Item: Sendable>: ObservableObject {
 
     public enum PageState {
-        case idle, loading, completed, error(Error)
+        case idle, loading, completed, error
     }
 
     @Published public private(set) var items: [Item] = []
@@ -46,7 +46,7 @@ public final class Paginator<Item: Sendable>: ObservableObject {
                 hasMoreData = newItems.count == pageSize
                 state = .completed
             } catch {
-                state = .error(error)
+                state = .error
             }
             isLoading = false
         }
@@ -58,6 +58,28 @@ public final class Paginator<Item: Sendable>: ObservableObject {
         self.hasMoreData = true
         self.state = .idle
         loadNextPage()
+    }
+
+    func paginateIfNeeded(currentIndex: Int, threshold: Int = 1) {
+         guard hasMoreData, !isLoading, state != .error else { return }
+
+         let triggerIndex = max(0, items.count - threshold)
+         if currentIndex >= triggerIndex {
+             loadNextPage()
+         }
+     }
+}
+
+extension Paginator.PageState: Equatable {
+    public static func == (lhs: Paginator<Item>.PageState, rhs: Paginator<Item>.PageState) -> Bool {
+        switch (lhs, rhs) {
+        case (.idle, .idle), (.loading, .loading), (.completed, .completed):
+            return true
+        case (.error, .error):
+            return true // Only compares case, not the error itself
+        default:
+            return false
+        }
     }
 }
 
